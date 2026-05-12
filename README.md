@@ -2,8 +2,12 @@
 
 **SOVS-Net: Open-Vocabulary Semantic Segmentation for SAR Imagery**
 
+## 📢 News
+
+- **[Revision Update]** A revised version of the manuscript has been submitted after major revision.
+- **[Planned Release]** The code and the **SAR-OVSeg** dataset will be made publicly available in this repository upon paper acceptance.
+  
 > 🚧 Note: This repository is currently under construction.  
-> ⚠️ The code and dataset will be made publicly available upon paper acceptance.
 
 ## 🧭 Overview
 
@@ -33,7 +37,7 @@ This project also introduces **SAR-OVSeg**, an open-vocabulary SAR semantic segm
 SOVS-Net is evaluated under diverse and challenging settings, including:
 
 - 🧩 Open-vocabulary SAR semantic segmentation  
-- 🌍 Zero-shot cross-dataset generalization  
+- 🌍 Cross-dataset generalization to unseen SAR datasets  
 - 🗺️ Large-scale whole-scene SAR mapping  
 - 📝 Text-driven semantic querying with flexible prompts  
 
