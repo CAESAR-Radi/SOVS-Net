@@ -7,7 +7,7 @@
 - **[Revision Update]** A revised version of the manuscript has been submitted in response to the latest reviewer comments. (September 2026)
 - **[Planned Release]** The official implementation of **SOVS-Net** and the **SAR-OVSeg** benchmark will be made publicly available in this repository upon paper acceptance.
   
-> 🚧 Note: This repository is currently under construction. The complete implementation and benchmark resources are being prepared for public release.
+> 🚧 Note: This repository is currently under construction. The complete implementation and benchmark resources have been prepared for release and will be made publicly available upon paper acceptance.
 
 ## 🧭 Overview
 
