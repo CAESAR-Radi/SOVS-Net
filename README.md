@@ -4,10 +4,10 @@
 
 ## 📢 News
 
-- **[Revision Update]** A revised version of the manuscript has been submitted after major revision.
-- **[Planned Release]** The code and the **SAR-OVSeg** dataset will be made publicly available in this repository upon paper acceptance.
+- **[Revision Update]** A revised version of the manuscript has been submitted in response to the latest reviewer comments. (September 2026)
+- **[Planned Release]** The official implementation of **SOVS-Net** and the **SAR-OVSeg** benchmark will be made publicly available in this repository upon paper acceptance.
   
-> 🚧 Note: This repository is currently under construction.  
+> 🚧 Note: This repository is currently under construction. The complete implementation and benchmark resources are being prepared for public release.
 
 ## 🧭 Overview
 
@@ -41,7 +41,7 @@ SOVS-Net is evaluated under diverse and challenging settings, including:
 - 🗺️ Large-scale whole-scene SAR mapping  
 - 📝 Text-driven semantic querying with flexible prompts  
 
-## 📦 Coming Soon
+## 📦 Planned Release
 
 Upon acceptance of the paper, we will release the following:
 
