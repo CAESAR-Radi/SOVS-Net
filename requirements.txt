@@ -1,0 +1,20 @@
+# Install a CUDA-compatible PyTorch/torchvision pair and Detectron2 first.
+# Detectron2 is installed separately because it must be built against
+# the selected PyTorch/CUDA stack.
+
+# torch>=1.13
+# torchvision>=0.14
+
+numpy>=1.23,<2.0
+Pillow>=9.0
+fvcore>=0.1.5
+timm>=0.9,<1.0
+einops>=0.6
+ftfy>=6.0
+regex
+tqdm>=4.60
+transformers>=4.30,<5.0
+
+# The Python bindings must match the system libgdal version.
+# Installing GDAL with Conda before this file is recommended.
+# GDAL>=3.6,<4.0
