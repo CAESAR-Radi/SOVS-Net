@@ -1,50 +1,227 @@
-# 🛰️ SOVS-Net
+# SOVS-Net: Open-Vocabulary Segmentation for SAR Imagery
 
-**SOVS-Net: Open-Vocabulary Semantic Segmentation for SAR Imagery**
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.8%2B-brightgreen.svg)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-1.13%2B-orange.svg)](https://pytorch.org/)
 
-## 📢 News
+## 🚀 Overview
 
-- **[Revision Update]** A revised version of the manuscript has been submitted in response to the latest reviewer comments. (September 2026)
-- **[Planned Release]** The official implementation of **SOVS-Net** and the **SAR-OVSeg** benchmark will be made publicly available in this repository upon paper acceptance.
-  
-> 🚧 Note: This repository is currently under construction. The implementation and benchmark resources have been prepared for release and will be made publicly available upon paper acceptance.
+**SOVS-Net** is an open-vocabulary semantic segmentation framework designed for Synthetic Aperture Radar (SAR) imagery.  
+It aims to enable pixel-level semantic understanding of SAR scenes using natural-language category definitions.
 
-## 🧭 Overview
+SOVS-Net follows an **encoding–alignment–decoding** paradigm and introduces SAR-oriented vision-language alignment and decoding components to address the modality gap between SAR backscattering characteristics and textual semantics.
 
-SOVS-Net is an open-vocabulary semantic segmentation framework tailored for Synthetic Aperture Radar (SAR) imagery.  
-By representing semantic categories using natural language, SOVS-Net enables pixel-level land-cover parsing under text-defined label spaces, overcoming the limitations of conventional closed-set SAR segmentation.
+The repository also provides the **SAR-OVSeg** benchmark, a unified dataset for SAR open-vocabulary semantic segmentation.
 
-The framework follows an **encoding–alignment–decoding** paradigm and is specifically designed to address the modality gap between SAR backscattering characteristics and natural language semantics.
+---
 
-## 🧠 Key Characteristics
+## ✨ Key Features
 
-- 🔹 Pixel-level open-vocabulary semantic segmentation for SAR imagery  
-- 🔹 Cross-modal alignment between SAR visual features and textual semantics  
-- 🔹 Robust spatial decoding under complex scattering and noise conditions  
-- 🔹 Flexible adaptation to unseen datasets and dynamic label configurations  
+- **SAR-oriented open-vocabulary segmentation framework**  
+  Implements SOVS-Net, an encoding-alignment-decoding framework for SAR OVSS with natural-language category definitions.
 
-## 📊 SAR-OVSeg Benchmark
+- **SAR-OVSeg benchmark**  
+  Provides a standardized SAR OVSS benchmark with over 50,000 image-label pairs from multiple sources, covering diverse resolutions, geographic regions, and representative land-cover categories.
 
-This project also introduces **SAR-OVSeg**, an open-vocabulary SAR semantic segmentation benchmark constructed by harmonizing multiple public SAR datasets into a unified land-cover taxonomy.
+---
 
-- 🔹 Over **50,000** SAR image–label pairs  
-- 🔹 Multi-sensor, multi-resolution, and multi-region coverage  
-- 🔹 Pronounced long-tailed land-cover category distribution  
-- 🔹 Designed for open-vocabulary and cross-dataset evaluation  
+## 📂 Project Structure
 
-## 📈 Experimental Scope
+```text
+SOVS-Net/
+├── configs/
+│   ├── config.yaml
+│   └── convnextB_768.yaml
+├── datasets/
+│   └── SAR-OVSeg_release/
+│       ├── train/
+│       │   ├── images/
+│       │   └── annotations/
+│       └── test/
+│           ├── images/
+│           └── annotations/
+├── sovs/
+│   ├── data/
+│   ├── modeling/
+│   ├── third_party/
+│   └── utils/
+├── train_net.py
+├── requirements.txt
+├── LICENSE
+└── README.md
+```
 
-SOVS-Net is evaluated under diverse and challenging settings, including:
+---
 
-- 🧩 Open-vocabulary SAR semantic segmentation  
-- 🌍 Cross-dataset generalization to unseen SAR datasets  
-- 🗺️ Large-scale whole-scene SAR mapping  
-- 📝 Text-driven semantic querying with flexible prompts  
+## 🛠 Installation
 
-## 📦 Planned Release
+### Environment Requirements
 
-Upon acceptance of the paper, we will release the following:
+- Python >= 3.8
+- PyTorch >= 1.13
+- A PyTorch-compatible version of torchvision and Detectron2
+- GDAL for reading SAR GeoTIFF data
 
-- 📁 Full SOVS-Net training and inference code  
-- 📊 The SAR-OVSeg benchmark
-- ⚙️ Configuration files and scripts for reproduction  
+### Install Dependencies
+
+Please install a CUDA-compatible PyTorch/torchvision pair and Detectron2
+according to their official installation instructions before running the code:
+
+- [PyTorch installation](https://pytorch.org/get-started/locally/)
+- [Detectron2 installation](https://detectron2.readthedocs.io/en/latest/tutorials/install.html)
+
+GDAL is required but is not installed through `requirements.txt`.
+Installing it with Conda is recommended:
+
+```bash
+conda install -c conda-forge "gdal>=3.6,<4.0"
+```
+
+Then install the remaining dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 📦 Dataset Preparation
+
+Please download the SAR-OVSeg dataset from the following link:
+
+- **SAR-OVSeg Dataset:** [🔗 Baidu Netdisk](https://pan.baidu.com/s/1oFJHUm1vVyyYtlHu1HJZTw?pwd=7ghx) (Extraction code: `7ghx`)
+
+After downloading, place the dataset under the `datasets/` directory:
+
+```text
+datasets/
+└── SAR-OVSeg_release/
+    ├── train/
+    │   ├── images/
+    │   └── annotations/
+    └── test/
+        ├── images/
+        └── annotations/
+```
+
+The dataset contains 11 semantic categories:
+
+```text
+water, building, road, cropland, forest, shrubland, grassland,
+wetland, bareland, snow and ice, airport
+```
+
+The annotation TIFF files use label IDs from `0` to `10` for the 11 semantic categories, respectively, and `255` is used as the ignore label.
+
+---
+
+## 💾 Pretrained Weights
+
+Please download the pretrained weights and tokenizer files from the following link:
+
+- **SARCLIP ConvNeXt-B Weights:** [🔗 Baidu Netdisk](https://pan.baidu.com/s/1rZxkOIU1fB52L9NOheHDgQ?pwd=ntmr) (Extraction code: `ntmr`)
+
+Please place the pretrained files under the `pretrain/` directory.
+
+Expected structure:
+
+```text
+pretrain/
+├── convnextb_model.pth
+├── vocab.json
+└── merges.txt
+```
+
+---
+
+## 🚩 Quick Start
+
+### Training
+
+```bash
+python train_net.py \
+  --config-file configs/convnextB_768.yaml \
+  --num-gpus 1 \
+  --dist-url auto \
+  OUTPUT_DIR output/
+```
+
+### Evaluation
+
+```bash
+python train_net.py \
+  --config-file configs/convnextB_768.yaml \
+  --num-gpus 1 \
+  --dist-url "auto" \
+  --eval-only \
+  OUTPUT_DIR output/eval \
+  MODEL.SEM_SEG_HEAD.POOLING_SIZES "[1,1]" \
+  MODEL.WEIGHTS path/to/model_checkpoint.pth
+```
+
+---
+
+## ⚙️ Configuration Notes
+
+The main configuration file is:
+
+```text
+configs/convnextB_768.yaml
+```
+
+Some configuration fields are inherited from the original Detectron2/SED training pipeline and are retained for compatibility.  
+The main active settings for SOVS-Net include:
+
+```yaml
+MODEL:
+  META_ARCHITECTURE: "SOVSNet"
+  BACKBONE:
+    NAME: "CLIP"
+  SEM_SEG_HEAD:
+    NAME: "SOVSNetHead"
+    NUM_CLASSES: 11
+    IGNORE_VALUE: 255
+```
+
+The data mapper is adapted for SAR float/TIF inputs and reads SAR images using GDAL.
+
+---
+
+## 📌 Codebase and Acknowledgements
+
+This repository is built upon and adapted from the official implementation of **SED: A Simple Encoder-Decoder for Open-Vocabulary Semantic Segmentation**, which is licensed under the Apache License 2.0.
+
+We sincerely thank the authors of the following projects for their excellent open-source contributions:
+
+- [Detectron2](https://github.com/facebookresearch/detectron2)
+- [MaskFormer](https://github.com/facebookresearch/MaskFormer)
+- [OpenCLIP](https://github.com/mlfoundations/open_clip)
+- [SED](https://github.com/xb534/SED)
+
+---
+
+## 📄 License
+
+This repository is released under the [Apache License 2.0](LICENSE).
+
+Parts of the code are adapted from third-party open-source projects.  
+Please refer to the license and attribution notices in the corresponding files.
+
+---
+
+## 📚 Citation
+
+If you find this repository useful, please cite our work:
+
+```bibtex
+@misc{sovsnet2026,
+  title  = {SOVS-Net: Open-Vocabulary Segmentation for SAR Imagery via Cross-Modal Alignment and Hierarchical Semantic Reasoning},
+  author = {CAESAR-Radi},
+  year   = {2026},
+  url    = {https://github.com/CAESAR-Radi/SOVS-Net}
+}
+```
+
+The official citation will be updated after publication.
+
+---
